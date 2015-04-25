@@ -5,6 +5,7 @@
  */
 var fs = require('fs'),
 	http = require('http'),
+	socketio = require('socket.io'),
 	https = require('https'),
 	express = require('express'),
 	morgan = require('morgan'),
@@ -26,7 +27,7 @@ var fs = require('fs'),
 module.exports = function(db) {
 	// Initialize express app
 	var app = express();
-
+	
 	// Globbing model files
 	config.getGlobbedFiles('./app/models/**/*.js').forEach(function(modelPath) {
 		require(path.resolve(modelPath));
@@ -157,6 +158,12 @@ module.exports = function(db) {
 		// Return HTTPS server instance
 		return httpsServer;
 	}
+	
+	// Attach Socket.io
+	var server = http.createServer(app);
+	var io = socketio.listen(server);
+	app.set('socketio', io);
+	app.set('server', server);
 
 	// Return Express server instance
 	return app;

@@ -34,6 +34,8 @@ exports.sendMessage = function(req, res, next) {
 				message: errorHandler.getErrorMessage(err)
 			});
 		}  else {
+			var socketio = req.app.get('socketio'); // tacke out socket instance from the app container
+			socketio.sockets.emit('message.sent', messageToSave); // emit an event for all connected clients
 			res.json(messageToSave);
 		}
 	});

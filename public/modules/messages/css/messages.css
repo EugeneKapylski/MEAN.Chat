@@ -1,0 +1,28 @@
+.messages-container {
+    height: 150px;
+    overflow: auto;
+}
+
+table.messages-list {
+    width: 100%;
+     overflow: auto;
+}
+
+table.messages-list td.author {
+    text-align: left;
+    width: 150px;
+}
+
+table.messages-list td.post-date {
+    width: 170px;
+    font-size: 8pt;
+}
+
+table.messages-list td.message-text {
+    text-align: left;
+}
+
+.input-message-area {
+    margin-top: 30px;
+    width: 100%;
+}
