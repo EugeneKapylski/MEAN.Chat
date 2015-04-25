@@ -18,3 +18,23 @@ exports.allMessages = function(req, res, next) {
 		next();
 	});
 };
+
+exports.sendMessage = function(req, res, next) {
+	// Init Variables
+	var messageToSave = new Message(req.body);
+	
+	
+
+	var message = null;
+
+	// Then save the user 
+	messageToSave.save(function(err) {
+		if (err) {
+			return res.status(400).send({
+				message: errorHandler.getErrorMessage(err)
+			});
+		}  else {
+			res.json(messageToSave);
+		}
+	});
+};

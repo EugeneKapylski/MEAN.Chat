@@ -1,21 +1,9 @@
 <section data-ng-controller="HomeController">
-	
 	<div class="jumbotron text-center" data-ng-if="!authentication.user">
 		Welcome to ItechArt Chat application
 	</div>
 			
 	<div class="jumbotron text-center" data-ng-if="authentication.user">
-		<div class="row">
-			<div data-ng-include="'/modules/messages/views/public-messages/publicl-messages.client.view.html'"></div>
-		</div>
-		<br>
-		<div class="row">
-			<textarea placeholder="Type a message here"></textarea>
-		</div>
-		<div class="row">
-			<p>
-				<a class="btn btn-primary btn-lg" href="#">Send message</a>
-			</p>
-		</div>
+		<div data-ng-include="'/modules/messages/views/public-messages/public-messages.client.view.html'"></div>
 	</div>
 </section>

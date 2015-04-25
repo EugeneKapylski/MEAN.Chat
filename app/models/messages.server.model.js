@@ -18,12 +18,17 @@ var MessageSchema = new Schema({
 	postDate: {
 		type: Date,
 		default: Date.now
+	},
+	createdByUserId: {
+		type: String
+	},
+	createdByUserName: {
+		type: String
+	},
+	roomName: {
+		type: String,
+		trim: true
 	}
 });
-
-MessageSchema.methods.getAllMessages = function() {
-	return [{message: "message 1", postDate: new Date("2015-04-11T10:21:00")},
-		{message: "message 2", postDate: new Date("2015-04-11T11:26:00")}];
-};
 
 mongoose.model('Message', MessageSchema);

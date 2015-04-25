@@ -6,8 +6,8 @@ angular.module('messages').config(['$stateProvider',
 		// Users state routing
 		$stateProvider.
 		state('messages', {
-			url: '/messages/all',
-			templateUrl: 'modules/messages/views/public-messages/publicl-messages.client.view.html'
+			url: '/messages/public',
+			templateUrl: 'modules/messages/views/public-messages/public-messages.client.view.html'
 		});
 	}
 ]);

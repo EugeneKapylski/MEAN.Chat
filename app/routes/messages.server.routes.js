@@ -5,5 +5,6 @@ module.exports = function(app) {
 	var messages = require('../../app/controllers/public-messages.server.controller');
 
 	// Setting up the users profile api
-	app.route('/messages/all').get(messages.allMessages);
+	app.route('/messages/public').get(messages.allMessages);
+	app.route('/messages/public').post(messages.sendMessage);
 };
