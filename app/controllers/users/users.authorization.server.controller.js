@@ -10,6 +10,18 @@ var _ = require('lodash'),
 /**
  * User middleware
  */
+exports.allUsers = function(req, res, next) {
+	User.find().sort('displayName').exec(function(err, users) {
+		if (err) return next(err);
+		if (!users) return next(new Error('Failed to load Users'));
+		res.json(users);
+		next();
+	});
+};
+
+/**
+ * User middleware
+ */
 exports.userByID = function(req, res, next, id) {
 	User.findOne({
 		_id: id

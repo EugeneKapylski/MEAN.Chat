@@ -13,3 +13,7 @@
 .ng-valid.ng-dirty {
 	border-color: #78FA89;
 }
+
+.chat-and-users-container {
+	margin-top: 15px;
+}

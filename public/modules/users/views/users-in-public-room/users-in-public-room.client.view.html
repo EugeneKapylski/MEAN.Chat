@@ -1,0 +1,13 @@
+<div data-ng-controller="UsersInPublicRoomController">
+	<div class="row">
+		<div class="col-md-12 text-center">
+			<ul class="list-group list-of-users">
+			    <li class="list-group-item" ng-repeat="user in usersInRoom">
+			    	<span class="badge"></span> 	
+			    	<a href="/#!/messages/private" data-ng-bind="user.displayName"></a>
+			    </li>
+			   
+		  	</ul>
+		</div>
+	</div>
+</div>
