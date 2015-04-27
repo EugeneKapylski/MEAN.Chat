@@ -8,6 +8,7 @@ angular.module('messages').controller('PublicMessagesController', ['$scope', '$s
 			message: '',
 			createdByUserId: currentUser._id,
 			createdByUserName: currentUser.username,
+			targetUserId: '',
 			roomName: currentRoomName, 
 			postDate: ''
 		};
