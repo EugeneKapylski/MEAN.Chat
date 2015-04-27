@@ -9,9 +9,11 @@ angular.module('messages').config(['$stateProvider',
 			url: '/messages/public',
 			templateUrl: 'modules/messages/views/public-messages/public-messages.client.view.html'
 		}).
-		state('private-messages', {
-			url: '/messages/private/:userId',
+		state('private-chat', {
+			url: '/messages/targetUser/:userId',
 			templateUrl: 'modules/core/views/private-chat.client.view.html'
-		});
+		})
+	
+		;
 	}
 ]);

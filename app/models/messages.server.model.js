@@ -25,6 +25,9 @@ var MessageSchema = new Schema({
 	createdByUserName: {
 		type: String
 	},
+	targetUserId:{
+		type: String
+	},
 	roomName: {
 		type: String,
 		trim: true

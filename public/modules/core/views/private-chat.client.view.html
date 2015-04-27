@@ -2,11 +2,11 @@
    	<a href="/#!/">Go to public room</a>
 	<div class="text-center chat-and-users-container" data-ng-if="authentication.user">
 		<div class="col-md-10">
-			<div data-ng-include="'/modules/messages/views/public-messages/public-messages.client.view.html'"></div>
+			<div data-ng-include="'/modules/messages/views/private-messages/private-messages.client.view.html'"></div>
 		</div>
 		<div class="col-md-2">
 			<h4>Chat users:</h4>
-			<div data-ng-include="'/modules/users/views/users-in-public-room/users-in-public-room.client.view.html'"></div>
+			
 		</div>
 	</div>
 </section>

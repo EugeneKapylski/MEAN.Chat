@@ -1,0 +1,28 @@
+<div data-ng-controller="PrivateMessagesController">
+	<div class="row messages-container" schroll-bottom="allMessages">
+		<table class="messages-list table table-striped">
+			<tr ng-repeat="message in allMessages | orderBy: 'postDate'">
+				<td class="author">
+					<a href="/#!/messages/private" data-ng-bind="message.createdByUserName"></a>
+				</td>
+				<td class="message-text">
+					<span>{{message.message}}</span>
+				</td>
+				<td class="post-date">
+					<span>{{message.postDate | date:'EEEE, MMMM d, yyyy h:mm a'}}</span>
+				</td>
+			</tr>
+		</table>
+	</div>
+	<br>
+	<form name="inputMessageForm" data-ng-submit="sendMessage()" class="form-horizontal" novalidate autocomplete="off">
+	<div class="row input-message-container">
+		<div class="col-md-10">
+			<textarea class="input-message-area" type="textarea" placeholder="Type a message here" data-ng-model="newMessage.message"></textarea>
+		</div>
+		<div class="col-md-2">
+			<button type="submit" class="btn btn-large btn-primary">Send message</button>
+		</div>
+	</div>
+	</form>
+</div>
