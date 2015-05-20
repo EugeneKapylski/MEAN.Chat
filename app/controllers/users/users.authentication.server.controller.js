@@ -18,7 +18,6 @@ exports.signup = function(req, res) {
 
 	// Init Variables
 	var user = new User(req.body);
-	var message = null;
 
 	// Add missing user fields
 	user.provider = 'local';
@@ -32,8 +31,8 @@ exports.signup = function(req, res) {
 			});
 		} else {
 			// Remove sensitive data before login
-			user.password = undefined;
-			user.salt = undefined;
+			user.password = null;
+			user.salt = null;
 
 			req.login(user, function(err) {
 				if (err) {
@@ -55,8 +54,8 @@ exports.signin = function(req, res, next) {
 			res.status(400).send(info);
 		} else {
 			// Remove sensitive data before login
-			user.password = undefined;
-			user.salt = undefined;
+			user.password = null;
+			user.salt = null;
 
 			req.login(user, function(err) {
 				if (err) {
@@ -104,7 +103,7 @@ exports.saveOAuthUserProfile = function(req, providerUserProfile, done) {
 	if (!req.user) {
 		// Define a search query fields
 		var searchMainProviderIdentifierField = 'providerData.' + providerUserProfile.providerIdentifierField;
-		var searchAdditionalProviderIdentifierField = 'additionalProvidersData.' + providerUserProfile.provider + '.' + providerUserProfile.providerIdentifierField;
+		var searchAdditionalProviderIdentifierField = ['additionalProvidersData.', providerUserProfile.provider, '.', providerUserProfile.providerIdentifierField].join();
 
 		// Define main provider search query
 		var mainProviderSearchQuery = {};
@@ -125,7 +124,8 @@ exports.saveOAuthUserProfile = function(req, providerUserProfile, done) {
 				return done(err);
 			} else {
 				if (!user) {
-					var possibleUsername = providerUserProfile.username || ((providerUserProfile.email) ? providerUserProfile.email.split('@')[0] : '');
+					var possibleUsername = providerUserProfile.username || 
+						((providerUserProfile.email) ? providerUserProfile.email.split('@')[0] : '');
 
 					User.findUniqueUsername(possibleUsername, null, function(availableUsername) {
 						user = new User({
@@ -155,7 +155,9 @@ exports.saveOAuthUserProfile = function(req, providerUserProfile, done) {
 		// Check if user exists, is not signed in using this provider, and doesn't have that provider data already configured
 		if (user.provider !== providerUserProfile.provider && (!user.additionalProvidersData || !user.additionalProvidersData[providerUserProfile.provider])) {
 			// Add the provider data to the additional provider data field
-			if (!user.additionalProvidersData) user.additionalProvidersData = {};
+			if (!user.additionalProvidersData) { 
+				user.additionalProvidersData = {};
+			}
 			user.additionalProvidersData[providerUserProfile.provider] = providerUserProfile.providerData;
 
 			// Then tell mongoose that we've updated the additionalProvidersData field

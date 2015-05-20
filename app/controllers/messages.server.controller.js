@@ -12,8 +12,12 @@ var _ = require('lodash'),
  */
 exports.allMessages = function(req, res, next) {
 	Message.find({targetUserId: ''}).sort('-postDate').exec(function(err, messages) {
-		if (err) return next(err);
-		if (!messages) return next(new Error('Failed to get Messages'));
+		if (err) {
+			return next(err);
+		}
+		if (!messages) {
+			return next(new Error('Failed to get Messages'));
+		}
 		res.json(messages);
 		next();
 	});
@@ -34,7 +38,6 @@ exports.privateMessages = function(req, res, next) {
 exports.sendMessage = function(req, res, next) {
 	// Init Variables
 	var messageToSave = new Message(req.body);
-	var message = null;
 
 	// Then save the user 
 	messageToSave.save(function(err) {
